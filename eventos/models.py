@@ -1,4 +1,5 @@
 from django.db import models
+from usuarios.models import Usuario
 
 class Local(models.Model):
     nome = models.CharField(max_length=150)
@@ -9,12 +10,13 @@ class Local(models.Model):
     estado = models.CharField(max_length=255)
     cep = models.CharField(max_length=9)
     capacidade = models.PositiveBigIntegerField()
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         numero = f", {self.numero}" if self.numero else ""
         return (
             f"{self.nome} - {self.logradouro}{numero}, "
-            f"{self.bairro}, {self.cidade.name} - {self.estado.name}, "
+            f"{self.bairro}, {self.cidade} - {self.estado}, "
             f"CEP: {self.cep}"
         )
 
@@ -39,6 +41,7 @@ class Evento(models.Model):
     dataFim = models.DateTimeField()
     observacoes = models.TextField(null=True)
     local = models.ForeignKey(Local, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Evento {self.titulo}"
