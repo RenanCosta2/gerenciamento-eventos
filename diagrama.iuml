@@ -45,6 +45,7 @@ enum Status {
 }
 
 Usuario "1" -- "0..*" Evento
+Usuario "1" -- "0..*" Local
 Evento "1" -- "0..*" Custo
 Evento "0..*" -- "1" Local
 
