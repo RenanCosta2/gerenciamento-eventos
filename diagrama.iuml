@@ -28,6 +28,7 @@ class Local{
     - numero: int
     - bairro: String
     - cidade: String
+    - estado: String
     - cep: String
     - capacidade: int
 }
@@ -47,6 +48,6 @@ enum Status {
 
 Usuario "1" -- "0..*" Evento
 Evento "1" -- "0..*" Custo
-Evento "1" -- "1" Local
+Evento "0..*" -- "1" Local
 
 @enduml
