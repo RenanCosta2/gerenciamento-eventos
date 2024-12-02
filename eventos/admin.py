@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Local, Evento, Custo
 
-# Register your models here.
+admin.site.register(Local)
+admin.site.register(Evento)
+admin.site.register(Custo)
