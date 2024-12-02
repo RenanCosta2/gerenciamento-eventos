@@ -10,10 +10,8 @@ class Usuario{
 
 class Evento{
     - titulo: String
-    - dataInicio: Date
-    - dataFim: Date
-    - horarioInicio: Time
-    - horarioFim: Time
+    - dataInicio: DateTime
+    - dataFim: DateTime
     - descricao: String
     - orcamento: float
     - status: Status
