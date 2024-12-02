@@ -26,6 +26,21 @@ class EventoViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
 
+    @action(detail=True, methods=['GET'], url_path="custos")
+    def calcular_custos(self, request, pk=None):
+        evento = self.get_object()
+        if evento:
+            custos = Custo.objects.filter(evento=evento)
+
+            total = sum(custo.valor for custo in custos)
+
+            custo_serializer = CustoSerializer(custos, many=True, context={'request': request})
+
+            return Response({'custos': custo_serializer.data, 'total': total}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        
+
 class CustoViewSet(viewsets.ModelViewSet):
     serializer_class = CustoSerializer
     queryset = Custo.objects.all()
