@@ -9,9 +9,11 @@ class UsuarioSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        # Extrai a senha dos dados validados
         password = validated_data.pop('password')
 
+        # Cria instância do usuário com os dados restantes
         user = Usuario(**validated_data)
-        user.set_password(password)
+        user.set_password(password)  # Criptografa a senha
         user.save()
         return user
